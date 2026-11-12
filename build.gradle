@@ -1,0 +1,76 @@
+plugins {
+    id 'fabric-loom' version '1.14-SNAPSHOT'
+    id 'maven-publish'
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+    archivesName = project.archives_base_name
+}
+
+repositories {
+    mavenCentral()
+    maven { url = "https://maven.ryanliptak.com/"}
+    maven { url = "https://maven.architectury.dev/" }
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = "https://api.modrinth.com/maven"
+            }
+        }
+        filter {
+            includeGroup "maven.modrinth"
+        }
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+    // 1. Vulkan Graphics Engine
+    modRuntimeOnly "maven.modrinth:vulkanmod:${project.vulkanmod_version}"
+    include "maven.modrinth:vulkanmod:${project.vulkanmod_version}"
+
+    // 2. AppleSkin (Food Saturation HUD)
+    modRuntimeOnly "maven.modrinth:appleskin:${project.appleskin_version}"
+    include "maven.modrinth:appleskin:${project.appleskin_version}"
+
+    // 3. Wavey Capes
+    modRuntimeOnly "maven.modrinth:wavey-capes:${project.waveycapes_version}"
+    include "maven.modrinth:wavey-capes:${project.waveycapes_version}"
+
+    // 4. 3D Skin Layers
+    modRuntimeOnly "maven.modrinth:3dskinlayers:${project.skinlayers3d_version}"
+    include "maven.modrinth:3dskinlayers:${project.skinlayers3d_version}"
+
+    // 5. LambDynamicLights (Torch glowing in hand)
+    modRuntimeOnly "maven.modrinth:lambdynamiclights:${project.lambdynamiclights_version}"
+    include "maven.modrinth:lambdynamiclights:${project.lambdynamiclights_version}"
+
+    // 6. Continuity (OptiFine Connected Glass Textures)
+    modRuntimeOnly "maven.modrinth:continuity:${project.continuity_version}"
+    include "maven.modrinth:continuity:${project.continuity_version}"
+}
+
+processResources {
+    inputs.property "version", project.version
+    filesMatching("fabric.mod.json") {
+        expand "version": project.version
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 21
+}
+
+java {
+    withSourcesJar()
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}

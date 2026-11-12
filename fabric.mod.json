@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "ultrafps",
+  "version": "4.0.0-vulkan",
+  "name": "UltraFPS Vulkan All-in-One Ultimate (1.21.11)",
+  "description": "Vulkan + uku Armor HUD + Status Effect Bars + AppleSkin + Wavey Capes + 3D Skin Layers + LambDynamicLights + Continuity Connected Textures + Zoom for Minecraft 1.21.11.",
+  "authors": [
+    "Vishal"
+  ],
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.vishal.ultrafps.UltraFpsClient"
+    ]
+  },
+  "mixins": [
+    "ultrafps.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.18.0",
+    "minecraft": "1.21.11",
+    "java": ">=21",
+    "fabric-api": "*"
+  },
+  "recommends": {
+    "vulkanmod": "*",
+    "appleskin": "*",
+    "waveycapes": "*",
+    "skinlayers3d": "*",
+    "lambdynamiclights": "*",
+    "continuity": "*"
+  }
+}

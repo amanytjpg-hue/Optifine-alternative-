@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.vishal.ultrafps.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "ZoomAndFpsMixin",
+    "StatusEffectBarMixin",
+    "EntityCullingMixin",
+    "AppleSkinHudMixin",
+    "WaveyCapesPhysicsMixin",
+    "SkinLayers3DMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
